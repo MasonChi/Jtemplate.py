@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Mysql database type definition
+"""
+STRING_TYPE = ['CHAR', 'VARCHAR', 'TINYBLOB', 'TINYTEXT', 'BLOB', 'TEXT', 'MEDIUMBLOB', 'MEDIUMTEXT', 'LONGBLOB',
+               'LONGTEXT', 'VARBINARY', 'BINARY', 'DATE', 'TIME', 'YEAR', 'ENUM', 'SET']
+INT_TYPE = ['TINYINT', 'SMALLINT']
+LONG_TYPE = ['MEDIUMINT', 'INT', 'INTEGER']
+BIGINT_TYPE = ['BIGINT']
+FLOAT_TYPE = ['FLOAT']
+DOUBLE_TYPE = ['DOUBLE']
+DECIMAL_TYPE = ['DECIMAL']
+DATE_TYPE = ['DATETIME', 'TIMESTAMP']

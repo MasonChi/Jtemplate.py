@@ -1,0 +1,12 @@
+package com.miz.${project}.entity.example;
+
+import com.miz.mekansm.dist.core.example.Example;
+import com.miz.${project}.entity.${entity};
+
+/**
+ * Created by ${creator}.
+ * Date: ${create_date}
+ * Description:
+ */
+public class ${entity}Example extends Example<${entity}> {
+}

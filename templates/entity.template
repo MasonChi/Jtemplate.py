@@ -1,0 +1,18 @@
+package com.miz.${project}.entity;
+
+import com.miz.mekansm.dist.api.pojo.instance.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Table;
+${import_package}
+
+/**
+ * Created by ${creator}.
+ * Date: ${create_date}.
+ * Description:
+ */
+@Table(name = "${table}")
+public class ${entity} extends BaseEntity {
+    ${property}
+    ${getter_setter}
+}

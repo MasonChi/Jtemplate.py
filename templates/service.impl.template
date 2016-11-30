@@ -1,0 +1,26 @@
+package com.miz.${project}.service.atom.impl;
+
+import com.miz.${project}.entity.${entity};
+import com.miz.${project}.mapper.athena.${entity}Mapper;
+import com.miz.${project}.service.atom.${entity}Service;
+import com.miz.mekansm.dist.core.persistence.BaseMapper;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+/**
+ * Created by ${creator}.
+ * Date: ${create_date}.
+ * Description:
+ */
+@Service
+public class ${entity}ServiceImpl implements ${entity}Service {
+
+    @Resource
+    private ${entity}Mapper ${entity_first_lowercase}Mapper;
+
+    @Override
+    protected BaseMapper<${entity}> getBaseMapper() {
+        return ${entity_first_lowercase}Mapper;
+    }
+}

@@ -1,0 +1,12 @@
+package com.miz.${project}.mapper;
+
+import com.miz.${project}.entity.${entity};
+import com.miz.mekansm.dist.core.persistence.BaseMapper;
+
+/**
+ * Created by ${creator}.
+ * Date: ${create_date}.
+ * Description:
+ */
+public interface ${entity}Mapper extends BaseMapper<${entity}> {
+}

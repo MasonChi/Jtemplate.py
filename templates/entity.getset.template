@@ -1,0 +1,8 @@
+
+    public ${property_type} get${property_name_capitalize}() {
+        return ${property_name};
+    }
+
+    public void set${property_name_capitalize}(${property_type} ${property_name}) {
+        this.${property_name} = ${property_name};
+    }

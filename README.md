@@ -9,6 +9,6 @@ If you have any questions about the script or would like to discuss with me then
 ----
 - main.py: run the script and generate the java file.
 
-- mysql package: connect the mysql database and about the configuration of the mysql.
+- mysql package: about the script how to connect to the mysql database and this package include the configuration of the mysql.
 
-- templates package: include the java file templates.
+- templates package: include the java file templates, java class files is generated through the template.

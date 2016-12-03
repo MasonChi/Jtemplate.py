@@ -7,10 +7,7 @@
 """
 import os
 
-__path_list = []
-
-
-def search(path, word):
+def search(path, word, __path_list):
     """
     查询path目录下word相同文件夹名的目录绝对路径
     :param path: 查询的目录
@@ -21,10 +18,8 @@ def search(path, word):
         fp = os.path.join(path, x)
         if x == word:
             __path_list.append(os.path.abspath(fp))
-        else:
-            if os.path.isdir(fp):
-                search(fp, word)
-
+        if os.path.isdir(fp):
+            search(fp, word, __path_list)
     return __path_list
 
 
@@ -47,7 +42,8 @@ def search_package(project_path, package, module=None, filter='src\\main\\java')
 
     # 查询项目目录下包含basename目录名的所有的目录路径
     # 过滤出包含有package的所有目录路径,并且包含module
-    search(project_path, basename)
+    __path_list = []
+    search(project_path, basename, __path_list)
     filterpath = []
     for e in __path_list:
 
@@ -55,13 +51,20 @@ def search_package(project_path, package, module=None, filter='src\\main\\java')
                 and module in e \
                 and filter in e:
             filterpath.append(e)
+    if filterpath.__len__() < 1:
+        raise Exception('查询不到文件需生成的路径')
     if filterpath.__len__() > 1:
         raise Exception('查询到生成文件的路径不唯一,请检查提供的参数是否有误')
     return filterpath[0]
 
 
 if __name__ == '__main__':
-    print(search('C:\\Apps\\sinnis', 'service-atom'))
+    path_list = search(r'C:\Apps\sinnis\project\entity', 'entity')
+    print('---------------------------')
+    print(path_list)
 
     path = search_package('C:\\Apps\\sinnis', 'com.miz.sinnis.service.atom', 'service-atom')
     print(path)
+
+    resource_path = search_package('C:\\Apps\\sinnis', 'com.miz.sinnis.dao.mapper', 'dao', filter='src\\main\\resources')
+    print(resource_path)

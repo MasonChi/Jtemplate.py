@@ -19,8 +19,4 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     @Resource
     private ${entity}Mapper ${entity_first_lowercase}Mapper;
 
-    @Override
-    protected BaseMapper<${entity}> getBaseMapper() {
-        return ${entity_first_lowercase}Mapper;
-    }
 }

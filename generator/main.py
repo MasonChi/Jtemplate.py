@@ -9,7 +9,7 @@ from generator.yate import *
 HOST = 'localhost'
 USERNAME = 'root'
 PASSWORD = '123456'
-POST = 801
+PORT = 801
 
 PROJECT = 'project'
 AUTHOR = 'child'
@@ -21,7 +21,7 @@ ENTITY = 'User'
 FILE_PATH = 'C:\\test\\'
 
 if __name__ == '__main__':
-    param = MySQLParam(TABLE, HOST, USERNAME, PASSWORD, DATABASE, POST)
+    param = MySQLParam(TABLE, HOST, USERNAME, PASSWORD, DATABASE, PORT)
 
     print('start generate entity class file...')
     with open(FILE_PATH + ENTITY + '.java', 'w') as f:

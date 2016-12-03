@@ -45,7 +45,7 @@ if __name__ == '__main__':
         service_impl_path = pos.search_package(PROJECT_PATH, 'com.miz.sinnis.service.atom.impl', 'service-atom')
         mapper_path = pos.search_package(PROJECT_PATH, 'com.miz.sinnis.dao.mapper', 'dao')
         mapper_xml_path = pos.search_package(PROJECT_PATH, 'com.miz.sinnis.dao.mapper', 'dao',
-                                             filter='src\\main\\resources')
+                                             filter='src' + os.sep + 'main' + os.sep + 'resources')
 
     entity_path = os.path.join(entity_path, ENTITY) + '.java'
     example_path = os.path.join(example_path, ENTITY) + 'Example.java'

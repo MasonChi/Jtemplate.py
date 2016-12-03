@@ -7,6 +7,7 @@
 """
 import os
 
+
 def search(path, word, __path_list):
     """
     查询path目录下word相同文件夹名的目录绝对路径
@@ -23,7 +24,7 @@ def search(path, word, __path_list):
     return __path_list
 
 
-def search_package(project_path, package, module=None, filter='src\\main\\java'):
+def search_package(project_path, package, module=None, filter='src' + os.sep + 'main' + os.sep + 'java'):
     """
     查询包路径
     :param project_path:项目路径
@@ -66,5 +67,6 @@ if __name__ == '__main__':
     path = search_package('C:\\Apps\\sinnis', 'com.miz.sinnis.service.atom', 'service-atom')
     print(path)
 
-    resource_path = search_package('C:\\Apps\\sinnis', 'com.miz.sinnis.dao.mapper', 'dao', filter='src\\main\\resources')
+    resource_path = search_package('C:\\Apps\\sinnis', 'com.miz.sinnis.dao.mapper', 'dao',
+                                   filter='src\\main\\resources')
     print(resource_path)

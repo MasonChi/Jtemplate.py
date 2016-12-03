@@ -1,7 +1,7 @@
 package com.miz.${project}.service.atom.impl;
 
 import com.miz.${project}.entity.${entity};
-import com.miz.${project}.mapper.athena.${entity}Mapper;
+import com.miz.${project}.mapper.${project}.${entity}Mapper;
 import com.miz.${project}.service.atom.${entity}Service;
 import com.miz.mekansm.dist.core.persistence.BaseMapper;
 import org.springframework.stereotype.Service;

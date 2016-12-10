@@ -3,18 +3,46 @@
 
 import tkinter as tk
 
-from mysql import mysql_param
+from generator import generate
 
 
 class Application:
     def __init__(self, window):
+        """
+        call function generate user interface
+        :param window:
+        """
         self.window = window
         self.buildContext()
 
     def start(self):
-        pass
+        """
+        start generate template files
+        :return:
+        """
+        self._host = self.entry_host_var.get()
+        self._port = int(self.entry_port_var.get())
+        self._username = self.entry_username_var.get()
+        self._password = self.entry_password_var.get()
+        self._database = self.entry_database_var.get()
+        self._table = self.entry_table_var.get()
+        self._entity = self.entry_entity_var.get()
+        self._author = self.entry_author_var.get()
+
+        self._project = self.entry_project_var.get()
+        self._file_path = self.file_path_var.get()
+        self._auto_path = self.auto_var.get()
+        self._project_path = self.project_path_var.get()
+        start = generate.Generate(self._host, self._port, self._username, self._password, self._database, self._table,
+                                  self._entity, self._author, self._project, self._file_path, self._auto_path,
+                                  self._project_path)
+        start.gen()
 
     def buildContext(self):
+        """
+        build user interface
+        :return:
+        """
         self.context = tk.LabelFrame(self.window, text='Params Config', height=500, width=700)
         self.context.grid(row=1, column=0, ipadx=65, padx=45, pady=2)
 
@@ -94,22 +122,22 @@ class Application:
         self.context_auto.grid(row=1, column=2, padx=15, pady=5, sticky='w')
 
         self.auto_var = tk.IntVar()
-        self.context_auto = tk.Checkbutton(self.context, text="Auto Path", variable=self.auto_var, onvalue=1,
-                                           offvalue=0)
+        self.context_auto = tk.Checkbutton(self.context, text="Auto Path", variable=self.auto_var, onvalue=True,
+                                           offvalue=False)
         self.context_auto.grid(row=1, column=3, padx=10, pady=5, sticky='w')
 
         self.context_path = tk.Label(self.context, text='ProjectPath:')
         self.context_path.grid(row=2, column=2, padx=15, pady=5, sticky='w')
 
-        self.path_var = tk.StringVar()
-        self.path = tk.Entry(self.context, textvariable=self.path_var)
-        self.path.grid(row=2, column=3, padx=15, pady=5)
+        self.project_path_var = tk.StringVar()
+        self.project_path = tk.Entry(self.context, textvariable=self.project_path_var)
+        self.project_path.grid(row=2, column=3, padx=15, pady=5)
 
         # text and button
         self.text = tk.Text(window, width=75, height=6)
         self.text.grid(row=2, column=0, padx=45, pady=5, sticky='w')
 
-        self.start = tk.Button(window, text='Start', width=17,command=self.start)
+        self.start = tk.Button(window, text='Start', width=17, command=self.start)
         self.start.grid(row=2, column=0, padx=45, sticky='e')
 
 
@@ -125,18 +153,3 @@ if __name__ == '__main__':
 
     Application(window)
     window.mainloop()
-
-# HOST = 'localhost'
-# USERNAME = 'root'
-# PASSWORD = '123456'
-# PORT = 401
-#
-# PROJECT = 'project'
-# PROJECT_PATH = r'C:\Apps\project'
-# AUTHOR = 'child'
-#
-# DATABASE = 'project'
-# TABLE = 'user'
-# ENTITY = 'User'
-#
-# FILE_PATH = r'C:\test'

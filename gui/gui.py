@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import tkinter as tk
+from tkinter.filedialog import askdirectory
 
 from generator import generate
 
@@ -12,31 +13,49 @@ class Application:
         call function generate user interface
         :param window:
         """
+        self.file_path_var = tk.StringVar()
+
         self.window = window
         self.buildContext()
+
+        params = generate.Generate.get_from_store()
+        if params:
+            self.entry_host_var.set(params["host"])
+            self.entry_port_var.set(params["port"])
+            self.entry_username_var.set(params["username"])
+            self.entry_password_var.set(params["password"])
+            self.entry_database_var.set(params["database"])
+            self.entry_table_var.set(params["table"])
+            self.entry_entity_var.set(params["entity"])
+            self.entry_author_var.set(params["author"])
+            self.entry_project_var.set(params["project"])
+            self.file_path_var.set(params["file_path"])
 
     def start(self):
         """
         start generate template files
         :return:
         """
-        self._host = self.entry_host_var.get()
-        self._port = int(self.entry_port_var.get())
-        self._username = self.entry_username_var.get()
-        self._password = self.entry_password_var.get()
-        self._database = self.entry_database_var.get()
-        self._table = self.entry_table_var.get()
-        self._entity = self.entry_entity_var.get()
-        self._author = self.entry_author_var.get()
+        self.host = self.entry_host_var.get()
+        self.port = int(self.entry_port_var.get())
+        self.username = self.entry_username_var.get()
+        self.password = self.entry_password_var.get()
+        self.database = self.entry_database_var.get()
+        self.table = self.entry_table_var.get()
+        self.entity = self.entry_entity_var.get()
+        self.author = self.entry_author_var.get()
 
-        self._project = self.entry_project_var.get()
-        self._file_path = self.file_path_var.get()
-        self._auto_path = self.auto_var.get()
-        self._project_path = self.project_path_var.get()
-        start = generate.Generate(self._host, self._port, self._username, self._password, self._database, self._table,
-                                  self._entity, self._author, self._project, self._file_path, self._auto_path,
-                                  self._project_path)
+        self.project = self.entry_project_var.get()
+        self.file_path = self.file_path_var.get()
+
+        start = generate.Generate(self.host, self.port, self.username, self.password, self.database,
+                                  self.table, self.entity, self.author, self.project, self.file_path)
         start.gen()
+        start.put_to_store
+
+    def select_path(self):
+        file_path = askdirectory()
+        self.file_path_var.set(file_path)
 
     def buildContext(self):
         """
@@ -44,7 +63,7 @@ class Application:
         :return:
         """
         self.context = tk.LabelFrame(self.window, text='Params Config', height=500, width=700)
-        self.context.grid(row=1, column=0, ipadx=65, padx=45, pady=2)
+        self.context.grid(row=1, column=0, ipadx=20, padx=45, pady=2)
 
         # column 0,1
         self.context_host = tk.Label(self.context, text='MySQL Host:')
@@ -114,24 +133,26 @@ class Application:
         self.context_file = tk.Label(self.context, text='FilePath:')
         self.context_file.grid(row=0, column=2, padx=15, pady=5, sticky='w')
 
-        self.file_path_var = tk.StringVar()
         self.file_path = tk.Entry(self.context, textvariable=self.file_path_var)
         self.file_path.grid(row=0, column=3, padx=15, pady=5)
 
-        self.context_auto = tk.Label(self.context, text='AutoPath:')
-        self.context_auto.grid(row=1, column=2, padx=15, pady=5, sticky='w')
+        self.target = tk.Button(self.context, command=self.select_path, text='Select Path')
+        self.target.grid(row=0, column=4, padx=15, pady=5)
 
-        self.auto_var = tk.IntVar()
-        self.context_auto = tk.Checkbutton(self.context, text="Auto Path", variable=self.auto_var, onvalue=True,
-                                           offvalue=False)
-        self.context_auto.grid(row=1, column=3, padx=10, pady=5, sticky='w')
+        # self.context_auto = tk.Label(self.context, text='AutoPath:')
+        # self.context_auto.grid(row=1, column=2, padx=15, pady=5, sticky='w')
 
-        self.context_path = tk.Label(self.context, text='ProjectPath:')
-        self.context_path.grid(row=2, column=2, padx=15, pady=5, sticky='w')
-
-        self.project_path_var = tk.StringVar()
-        self.project_path = tk.Entry(self.context, textvariable=self.project_path_var)
-        self.project_path.grid(row=2, column=3, padx=15, pady=5)
+        # self.auto_var = tk.IntVar()
+        # self.context_auto = tk.Checkbutton(self.context, text="Auto Path", variable=self.auto_var, onvalue=1,
+        #                                    offvalue=0)
+        # self.context_auto.grid(row=1, column=3, padx=10, pady=5, sticky='w')
+        #
+        # self.context_path = tk.Label(self.context, text='ProjectPath:')
+        # self.context_path.grid(row=2, column=2, padx=15, pady=5, sticky='w')
+        #
+        # self.project_path_var = tk.StringVar()
+        # self.project_path = tk.Entry(self.context, textvariable=self.project_path_var)
+        # self.project_path.grid(row=2, column=3, padx=15, pady=5)
 
         # text and button
         self.text = tk.Text(window, width=75, height=6)

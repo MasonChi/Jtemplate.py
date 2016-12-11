@@ -2,9 +2,11 @@
 # -*- coding: UTF-8 -*-
 
 import tkinter as tk
+from tkinter import messagebox
 from tkinter.filedialog import askdirectory
 
 from generator import generate
+from util import resutil
 
 
 class Application:
@@ -31,6 +33,10 @@ class Application:
             self.entry_project_var.set(params["project"])
             self.file_path_var.set(params["file_path"])
 
+    def msg(self):
+        """show finish message box"""
+        tk.messagebox.showinfo(title='message', message='Generate Finished !')
+
     def start(self):
         """
         start generate template files
@@ -52,6 +58,7 @@ class Application:
                                   self.table, self.entity, self.author, self.project, self.file_path)
         start.gen()
         start.put_to_store
+        self.msg()
 
     def select_path(self):
         file_path = askdirectory()
@@ -168,7 +175,7 @@ if __name__ == '__main__':
     window.geometry('800x600')
 
     canvas = tk.Canvas(window, height=150, width=700)
-    image_file = tk.PhotoImage(file='welcome.gif')
+    image_file = tk.PhotoImage(file=resutil.resource_path('../resources/welcome.gif'))
     canvas.create_image(130, 10, anchor='nw', image=image_file)
     canvas.grid(row=0, column=0, padx=15, pady=2)
 

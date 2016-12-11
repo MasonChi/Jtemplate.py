@@ -9,6 +9,7 @@ import pickle
 
 from generator.yate import *
 from mysql import mysql_param
+from util import resutil
 
 
 class Generate:
@@ -35,7 +36,7 @@ class Generate:
         store params
         :return:
         """
-        params = {}
+        params = dict()
         params["host"] = input_param.__host
         params["port"] = input_param.__port
         params["username"] = input_param.__username
@@ -47,7 +48,7 @@ class Generate:
         params["project"] = input_param.__project
         params["file_path"] = input_param.__file_path
         try:
-            with open('input.pickle', 'wb') as f:
+            with open(resutil.resource_path('../resources/input.pickle'), 'wb') as f:
                 pickle.dump(params, f)
         except IOError as ioerr:
             print('File error (put_and_store): ' + str(ioerr))
@@ -61,7 +62,7 @@ class Generate:
         """
         params = {}
         try:
-            with open('input.pickle', 'rb') as f:
+            with open(resutil.resource_path('../resources/input.pickle'), 'rb') as f:
                 params = pickle.load(f)
         except IOError as ioerr:
             print('File error (get_from_store): ' + str(ioerr))
@@ -72,6 +73,9 @@ class Generate:
         generate files
         :return:
         """
+        # store params
+        Generate.put_to_store(self)
+
         # if self.auto_path == 0:
         #     entity_path = self.file_path
         #     example_path = self.file_path
@@ -128,6 +132,3 @@ class Generate:
         print('start generate mapper.xml configuration file...')
         with open(mapper_xml_path, 'w') as f:
             f.write(product_mapper_xml(self.__project, self.__entity, self.param.table))
-
-        # store params
-        Generate.put_to_store(self)

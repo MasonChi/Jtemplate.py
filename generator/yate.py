@@ -36,7 +36,7 @@ def _build_entity_import(attrs):
         # add the imported packages to set
         packageset = set()
         for attr in attrs:
-            with open(resutil.resource_path("../templates/entity.package.template")) as packagef:
+            with open(resutil.resource_path("templates/entity.package.template")) as packagef:
                 package_text = packagef.read()
             package = Template(package_text)
             if attr.field_type == 'BigDecimal':
@@ -70,7 +70,7 @@ def _build_entity_property(attrs):
     try:
         properties = ''
         for attr in attrs:
-            with open(resutil.resource_path("../templates/entity.property.template")) as propertyf:
+            with open(resutil.resource_path("templates/entity.property.template")) as propertyf:
                 property_text = propertyf.read()
             prop = Template(property_text)
             annotation = ''
@@ -100,7 +100,7 @@ def _build_entity_setter_getter(attrs):
     try:
         setter_getter = ''
         for attr in attrs:
-            with open(resutil.resource_path("../templates/entity.getset.template")) as setgetf:
+            with open(resutil.resource_path("templates/entity.getset.template")) as setgetf:
                 setget_text = setgetf.read()
             setget = Template(setget_text)
             setter_getter += setget.substitute(property_type=attr.field_type, property_name=attr.field,
@@ -130,7 +130,7 @@ def product_entity(mysql_param, project_name, entity_name, creator=None, create_
     entity_property = _build_entity_property(attrs)
     entity_getset = _build_entity_setter_getter(attrs)
     try:
-        with open(resutil.resource_path("../templates/entity.template")) as entityf:
+        with open(resutil.resource_path("templates/entity.template")) as entityf:
             entity_text = entityf.read()
         entity = Template(entity_text)
         return entity.substitute(project=project_name, table=mysql_param.table, entity=entity_name,
@@ -145,7 +145,7 @@ def product_example(project_name, entity_name, creator=None, create_date=now):
     Build example class by entity.template
     """
     try:
-        with open(resutil.resource_path("../templates/example.template")) as examplef:
+        with open(resutil.resource_path("templates/example.template")) as examplef:
             example_text = examplef.read()
         example = Template(example_text)
         return example.substitute(project=project_name, entity=entity_name, creator=creator, create_date=create_date)
@@ -158,7 +158,7 @@ def product_service(project_name, entity_name, creator=None, create_date=now):
     Build service interface by service.template
     """
     try:
-        with open(resutil.resource_path("../templates/service.template")) as servicef:
+        with open(resutil.resource_path("templates/service.template")) as servicef:
             service_text = servicef.read()
         service = Template(service_text)
         return service.substitute(project=project_name, entity=entity_name, creator=creator, create_date=create_date)
@@ -176,7 +176,7 @@ def product_service_impl(project_name, entity_name, creator=None, create_date=no
     :return: service class content
     """
     try:
-        with open(resutil.resource_path("../templates/service.impl.template")) as serviceimplf:
+        with open(resutil.resource_path("templates/service.impl.template")) as serviceimplf:
             service_impl_text = serviceimplf.read()
         service_impl = Template(service_impl_text)
         return service_impl.substitute(project=project_name, entity=entity_name,
@@ -196,7 +196,7 @@ def product_mapper(project_name, entity_name, creator=None, create_date=now):
     :return:
     """
     try:
-        with open(resutil.resource_path("../templates/mapper.template")) as mapperf:
+        with open(resutil.resource_path("templates/mapper.template")) as mapperf:
             mapper_text = mapperf.read()
         mapper = Template(mapper_text)
         return mapper.substitute(project=project_name, entity=entity_name, creator=creator, create_date=create_date)
@@ -209,7 +209,7 @@ def product_mapper_xml(project_name, entity_name, table):
     Build mapper interface xml config by service.template
     """
     try:
-        with open(resutil.resource_path("../templates/mapper.xml.template")) as mapperxmlf:
+        with open(resutil.resource_path("templates/mapper.xml.template")) as mapperxmlf:
             mapper_xml_text = mapperxmlf.read()
         mapper_xml = Template(mapper_xml_text)
         return mapper_xml.substitute(project=project_name, entity=entity_name, table=table)

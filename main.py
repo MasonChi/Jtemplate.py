@@ -175,7 +175,7 @@ if __name__ == '__main__':
     window.geometry('800x600')
 
     canvas = tk.Canvas(window, height=150, width=700)
-    image_file = tk.PhotoImage(file=resutil.resource_path('../resources/welcome.gif'))
+    image_file = tk.PhotoImage(file=resutil.resource_path('resources/welcome.gif'))
     canvas.create_image(130, 10, anchor='nw', image=image_file)
     canvas.grid(row=0, column=0, padx=15, pady=2)
 

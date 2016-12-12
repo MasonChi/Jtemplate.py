@@ -48,7 +48,7 @@ class Generate:
         params["project"] = input_param.__project
         params["file_path"] = input_param.__file_path
         try:
-            with open(resutil.resource_path('../resources/input.pickle'), 'wb') as f:
+            with open(resutil.resource_path('resources/input.pickle'), 'wb') as f:
                 pickle.dump(params, f)
         except IOError as ioerr:
             print('File error (put_and_store): ' + str(ioerr))
@@ -62,7 +62,7 @@ class Generate:
         """
         params = {}
         try:
-            with open(resutil.resource_path('../resources/input.pickle'), 'rb') as f:
+            with open(resutil.resource_path('resources/input.pickle'), 'rb') as f:
                 params = pickle.load(f)
         except IOError as ioerr:
             print('File error (get_from_store): ' + str(ioerr))
